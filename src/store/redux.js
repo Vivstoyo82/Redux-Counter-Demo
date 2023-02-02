@@ -1,4 +1,4 @@
-import { createStore } from 'redux'
+// import { createStore } from 'redux'
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
 const initialState = { counter: 0, showCounter: true }; 
@@ -14,7 +14,7 @@ reducers : {
         state.counter--;
     },
     increase(state, action) {
-        state.counter = state.counter + action.value;
+        state.counter = state.counter + action.payload;
     },
     toggleCounter(state) {
         state.showCounter = !state.showCounter
@@ -26,6 +26,8 @@ reducers : {
 const store = configureStore({
     reducer : counterSlice.reducer
 }); //ConfigureStore like createStore creates a store but it makes merging multiple reducers into one reducer easier thereafter.
+
+export const counterActions = counterSlice.actions;
 
 // We can write configureStore like this also below
 // const store = configureStore({
