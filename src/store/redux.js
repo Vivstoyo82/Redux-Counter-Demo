@@ -1,11 +1,9 @@
-// import { act } from 'react-dom/test-utils';
 import { createStore } from 'redux'
-import { createSlice } from '@reduxjs/toolkit'
-import { act } from 'react-dom/test-utils';
+import { configureStore, createSlice } from '@reduxjs/toolkit'
 
 const initialState = { counter: 0, showCounter: true }; 
 
-createSlice({
+const counterSlice = createSlice({
 name : 'counter', // you can give any name not necessarily counter as above
 initialState,
 reducers : {
@@ -24,38 +22,17 @@ reducers : {
 }
 });
 
-const counterReducer = ( state = initialState , action) => {
-    if (action.type === 'increment') {
-        return {
-            counter: state.counter + 1,
-            showCounter: state.showCounter
-        }
-    }
+// const store = createStore(counterSlice.reducer);
+const store = configureStore({
+    reducer : counterSlice.reducer
+}); //ConfigureStore like createStore creates a store but it makes merging multiple reducers into one reducer easier thereafter.
 
-    if (action.type === 'increase') {
-        return {
-            counter: state.counter + action.value,
-            showCounter: state.showCounter
-        }
-    }
-
-    if (action.type === 'decrement') {
-        return {
-            counter: state.counter - 1,
-            showCounter: state.showCounter
-        }
-    }
-
-    if (action.type === 'toggle') {
-        return {
-            showCounter: !state.showCounter,
-            counter: state.counter
-        }
-    }
-
-    return state;
-};
-
-const store = createStore(counterReducer);
+// We can write configureStore like this also below
+// const store = configureStore({
+//     reducer : {counter : counterSlice.reducer}
+// }); 
+// if we had multiple state slices in a bigger application something we're going to see later, then alternatively 
+// as a value for this reducer key, we could also set an object and in that object, we can set up any keys of our choice,
+// so any property names of our choice and the values of those properties would then be different reducer functions.
 
 export default store;
