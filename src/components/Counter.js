@@ -1,4 +1,4 @@
-import { useSelector, useDispatch }from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import classes from './Counter.module.css';
 
 const Counter = () => {
@@ -16,11 +16,11 @@ const Counter = () => {
   };
 
   const increaseHandler = () => {
-    dispatch({ type: 'increase', value : 5 }); // whatever we add here name is up to you let's value here so same should be there in the redux
+    dispatch({ type: 'increase', value: 5 }); // whatever we add here name is up to you let's value here so same should be there in the redux
   }; // here we are attaching an action payloads to redux
 
   const toggleCounterHandler = () => {
-    dispatch({ type : 'toggle' })
+    dispatch({ type: 'toggle' })
   };
 
   return (
@@ -32,7 +32,7 @@ const Counter = () => {
         <button onClick={increaseHandler}>Increase by 5</button>
         <button onClick={decrementHandler}>Decrement</button>
       </div>
-      <button onClick={toggleCounterHandler}>Toggle Counter</button>
+      <button onClick={toggleCounterHandler}>{show ? 'Hide Counter' : 'Show Counter'}</button>
     </main>
   );
 };
